@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15-DAY INTERVIEW STRIKE PLAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090a;
+  --bg2:      #0c1014;
+  --bg3:      #111820;
+  --bg4:      #161e28;
+  --amber:    #e8a020;
+  --amber-d:  #9c6a10;
+  --amber-xs: rgba(232,160,32,0.07);
+  --green:    #4ade80;
+  --green-d:  rgba(74,222,128,0.08);
+  --red:      #f87171;
+  --blue:     #60a5fa;
+  --blue-d:   rgba(96,165,250,0.08);
+  --pink:     #f472b6;
+  --pink-d:   rgba(244,114,182,0.08);
+  --cyan:     #22d3ee;
+  --cyan-d:   rgba(34,211,238,0.08);
+  --text:     #c8c4bc;
+  --text-d:   #5a6070;
+  --text-b:   #f0ece2;
+  --bdr:      rgba(232,160,32,0.15);
+  --bdr-d:    rgba(255,255,255,0.05);
+  --bdr-m:    rgba(255,255,255,0.09);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* scanlines */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px);
+}
+
+/* dot grid */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(232,160,32,0.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+.wrap{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 20px 100px}
+
+/* ───── HEADER ───── */
+.hdr{padding:44px 0 32px;border-bottom:1px solid var(--bdr);margin-bottom:32px}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:20px}
+
+.blink-badge{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);border:1px solid var(--amber);padding:4px 12px;display:inline-flex;align-items:center;gap:8px;
+  animation:bdrblink 2s step-end infinite;
+}
+.blink-dot{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:dotblink 1s step-end infinite}
+@keyframes bdrblink{0%,100%{border-color:var(--amber)}50%{border-color:transparent}}
+@keyframes dotblink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hdr-meta{font-size:10px;color:var(--text-d);text-align:right;line-height:2}
+.hdr-title{
+  font-family:'Space Mono',monospace;font-size:clamp(26px,5vw,54px);font-weight:700;
+  color:var(--text-b);line-height:1.05;letter-spacing:-.02em;
+}
+.hdr-title .acc{color:var(--amber)}
+.hdr-sub{font-size:12px;color:var(--text-d);max-width:580px;line-height:1.8;border-left:2px solid var(--amber-d);padding-left:14px;margin-top:16px}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--bdr);border:1px solid var(--bdr);margin-top:28px}
+.stat{background:var(--bg2);padding:14px 18px}
+.stat::before{content:attr(data-lbl);display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-d);margin-bottom:3px}
+.stat-v{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--amber)}
+.stat-u{font-size:10px;color:var(--text-d);margin-left:3px}
+
+/* ───── NAV ───── */
+.nav{display:flex;border:1px solid var(--bdr);margin-bottom:28px;overflow:hidden;flex-wrap:wrap}
+.nav-btn{
+  flex:1;min-width:110px;padding:10px 14px;font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-d);background:var(--bg2);border:none;border-right:1px solid var(--bdr-d);
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.nav-btn:last-child{border-right:none}
+.nav-btn:hover{color:var(--amber);background:var(--bg3)}
+.nav-btn.active{color:var(--bg);background:var(--amber);font-weight:600}
+.nav-btn .nb{font-size:8px;opacity:.7;display:block;margin-top:1px}
+
+/* ───── VIEW TOGGLE ───── */
+.view{display:none}.view.active{display:block}
+
+/* ───── WEEK DIVIDER ───── */
+.wk-div{display:flex;align-items:center;gap:14px;margin:32px 0 14px}
+.wk-line{flex:1;height:1px;background:var(--bdr)}
+.wk-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);white-space:nowrap}
+.wk-desc{font-size:10px;color:var(--text-d);white-space:nowrap}
+
+/* ───── DAY CARD ───── */
+.dc{background:var(--bg2);border:1px solid var(--bdr-d);margin-bottom:8px;transition:border-color .2s;animation:fu .3s ease both}
+.dc:hover{border-color:var(--bdr-m)}
+@keyframes fu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.dc-hdr{display:flex;align-items:stretch;cursor:pointer;user-select:none}
+
+.dc-num{
+  background:var(--bg3);padding:14px 16px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;border-right:1px solid var(--bdr-d);min-width:60px;
+}
+.dc-num-lbl{font-size:8px;color:var(--text-d);letter-spacing:.1em;text-transform:uppercase}
+.dc-num-val{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--amber);line-height:1}
+
+.dc-main{flex:1;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dc-title-wrap{flex:1}
+
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px}
+.tag{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+.t-code{background:var(--blue-d);color:var(--blue);border:1px solid rgba(96,165,250,.22)}
+.t-dsa{background:var(--amber-xs);color:var(--amber);border:1px solid rgba(232,160,32,.22)}
+.t-fe{background:var(--green-d);color:var(--green);border:1px solid rgba(74,222,128,.22)}
+.t-comms{background:var(--pink-d);color:var(--pink);border:1px solid rgba(244,114,182,.22)}
+.t-apply{background:rgba(232,160,32,.22);color:var(--amber);border:1px solid var(--amber)}
+.t-proj{background:var(--cyan-d);color:var(--cyan);border:1px solid rgba(34,211,238,.22)}
+
+.dc-title{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-b);line-height:1.3}
+
+.exp-ico{font-size:14px;color:var(--text-d);transition:transform .2s;flex-shrink:0}
+.dc.open .exp-ico{transform:rotate(180deg);color:var(--amber)}
+
+.dc-body{display:none;border-top:1px solid var(--bdr-d);animation:fi .2s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.dc.open .dc-body{display:block}
+
+/* day body grid */
+.db-obj{padding:14px 18px;border-bottom:1px solid var(--bdr-d)}
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.db-sec{padding:14px 18px;border-right:1px solid var(--bdr-d)}
+.db-sec:last-child,.db-sec.full{border-right:none}
+.db-sec.full{grid-column:1/-1}
+
+.sec-lbl{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-d);margin-bottom:8px;font-weight:600}
+
+.obj-txt{font-size:12px;color:var(--text-d);line-height:1.75;border-left:2px solid var(--amber-d);padding-left:12px}
+
+/* checklist */
+.chk-list{list-style:none}
+.chk-list li{display:flex;gap:9px;align-items:flex-start;font-size:11px;color:var(--text);line-height:1.55;padding:3px 0;border-bottom:1px solid var(--bdr-d)}
+.chk-list li:last-child{border-bottom:none}
+.chk-box{width:13px;height:13px;min-width:13px;border:1px solid var(--text-d);margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .1s;flex-shrink:0}
+.chk-box:hover{border-color:var(--amber)}
+.chk-box.on{background:var(--amber);border-color:var(--amber)}
+.chk-box.on::after{content:'✓';font-size:8px;color:var(--bg);font-weight:700}
+.chk-list li.done .chk-txt{text-decoration:line-through;color:var(--text-d)}
+
+/* time chips */
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:10px;padding:2px 8px;border:1px solid var(--bdr-d);color:var(--text-d);background:var(--bg3)}
+
+/* output */
+.out-box{font-size:11px;color:var(--green);line-height:1.75;padding:10px 12px;background:var(--green-d);border:1px solid rgba(74,222,128,.12)}
+.out-box::before{content:'→ ';font-weight:700}
+
+/* self test */
+.st-list{list-style:none}
+.st-list li{font-size:11px;color:var(--text-d);padding:3px 0;line-height:1.6}
+.st-list li::before{content:'> ';color:var(--amber);font-weight:700}
+
+/* project badge on day card */
+.proj-note{font-size:10px;color:var(--cyan);margin-top:3px;opacity:.8}
+
+/* ───── PROGRESS ───── */
+.prog-wrap{margin-bottom:24px}
+.prog-row{display:flex;justify-content:space-between;font-size:9px;color:var(--text-d);margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em}
+.prog-bg{height:2px;background:var(--bg3)}
+.prog-fill{height:100%;background:var(--amber);transition:width .4s ease}
+
+/* ───── PROJECT DEEP DIVE ───── */
+.pdv-hero{
+  background:var(--bg2);border:1px solid var(--bdr);padding:28px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.pdv-hero::before{
+  content:'PROJECT';position:absolute;right:-20px;top:-16px;
+  font-family:'Space Mono',monospace;font-size:90px;font-weight:700;
+  color:rgba(34,211,238,0.04);pointer-events:none;line-height:1;
+}
+.pdv-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(34,211,238,.3);padding:4px 12px;margin-bottom:16px}
+.pdv-title{font-family:'Space Mono',monospace;font-size:clamp(18px,3vw,28px);font-weight:700;color:var(--text-b);line-height:1.15;margin-bottom:10px}
+.pdv-title span{color:var(--cyan)}
+.pdv-sub{font-size:12px;color:var(--text-d);line-height:1.8;max-width:680px;border-left:2px solid rgba(34,211,238,.3);padding-left:14px}
+
+.proj-picker{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.proj-card{
+  background:var(--bg3);border:1px solid var(--bdr-d);padding:20px;cursor:pointer;
+  transition:border-color .2s,background .2s;position:relative;overflow:hidden;
+}
+.proj-card::before{content:attr(data-code);position:absolute;right:-8px;bottom:-10px;font-family:'Space Mono',monospace;font-size:64px;font-weight:700;color:rgba(255,255,255,0.03);pointer-events:none}
+.proj-card:hover{border-color:var(--bdr-m);background:var(--bg4)}
+.proj-card.selected{border-color:rgba(34,211,238,.5);background:var(--cyan-d)}
+.proj-card-lbl{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-d);margin-bottom:6px}
+.proj-card-name{font-family:'Space Mono',monospace;font-size:14px;color:var(--text-b);margin-bottom:4px}
+.proj-card-desc{font-size:11px;color:var(--text-d);line-height:1.6}
+.proj-card .sel-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--text-d);position:absolute;top:16px;right:16px;transition:all .15s}
+.proj-card.selected .sel-dot{background:var(--cyan);border-color:var(--cyan)}
+
+/* layer accordion */
+.layer{background:var(--bg2);border:1px solid var(--bdr-d);margin-bottom:8px;transition:border-color .2s}
+.layer:hover{border-color:var(--bdr-m)}
+.layer.open{border-color:rgba(34,211,238,.25)}
+
+.layer-hdr{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;user-select:none}
+.layer-num{
+  width:32px;height:32px;border:1px solid rgba(34,211,238,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--cyan);flex-shrink:0;
+}
+.layer.open .layer-num{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+
+.layer-info{flex:1}
+.layer-title{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-b);margin-bottom:2px}
+.layer-sub{font-size:10px;color:var(--text-d)}
+.layer-ico{font-size:14px;color:var(--text-d);transition:transform .2s;flex-shrink:0}
+.layer.open .layer-ico{transform:rotate(180deg);color:var(--cyan)}
+
+.layer-body{display:none;border-top:1px solid var(--bdr-d);animation:fi .2s ease}
+.layer.open .layer-body{display:block}
+
+/* layer inner layout */
+.layer-content{padding:20px}
+.lc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.lc-block{background:var(--bg3);border:1px solid var(--bdr-d);padding:16px}
+.lc-lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);opacity:.7;margin-bottom:8px;font-weight:600}
+.lc-q{font-size:11px;color:var(--text);line-height:1.7;padding:3px 0;border-bottom:1px solid var(--bdr-d)}
+.lc-q:last-child{border-bottom:none}
+.lc-q::before{content:'? ';color:var(--cyan);font-weight:700;opacity:.6}
+.lc-hint{font-size:10px;color:var(--text-d);line-height:1.7;padding:3px 0}
+.lc-hint::before{content:'» ';color:var(--amber-d)}
+
+/* answer area */
+.answer-area{
+  width:100%;background:var(--bg3);border:1px solid var(--bdr-d);
+  color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;
+  padding:12px;resize:vertical;min-height:80px;line-height:1.7;
+  outline:none;transition:border-color .15s;margin-top:8px;
+}
+.answer-area:focus{border-color:rgba(34,211,238,.35)}
+.answer-area::placeholder{color:var(--text-d)}
+
+/* mock questions */
+.mock-q-list{list-style:none}
+.mock-q{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 16px;border-bottom:1px solid var(--bdr-d);
+  font-size:12px;color:var(--text);line-height:1.6;
+}
+.mock-q:last-child{border-bottom:none}
+.mock-q-icon{
+  font-family:'Space Mono',monospace;font-size:9px;color:var(--bg);background:var(--cyan);
+  padding:2px 6px;flex-shrink:0;margin-top:2px;letter-spacing:.05em;
+}
+.mock-q.hard .mock-q-icon{background:var(--red)}
+.mock-q.hard{color:var(--text-b)}
+
+/* daily schedule for project */
+.sched-row{display:flex;gap:0;border:1px solid var(--bdr-d);margin-bottom:12px;overflow:hidden}
+.sched-day{flex:1;padding:10px 12px;border-right:1px solid var(--bdr-d);background:var(--bg3);min-width:0}
+.sched-day:last-child{border-right:none}
+.sched-day-lbl{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-d);margin-bottom:4px}
+.sched-day-focus{font-size:10px;color:var(--cyan);line-height:1.5}
+.sched-day-time{font-size:9px;color:var(--text-d);margin-top:3px}
+
+/* outcome box */
+.outcome-box{
+  background:var(--cyan-d);border:1px solid rgba(34,211,238,.2);padding:20px;margin-top:20px;
+}
+.outcome-box-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.outcome-item{font-size:12px;color:var(--text);line-height:1.7;padding:2px 0}
+.outcome-item::before{content:'✓ ';color:var(--cyan);font-weight:700}
+
+/* ───── RULES VIEW ───── */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.rc{background:var(--bg2);border:1px solid var(--bdr-d);padding:18px}
+.rc-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;border-bottom:1px solid var(--bdr);padding-bottom:7px}
+.ri{font-size:11px;color:var(--text);line-height:1.75;padding:1px 0}
+.ri.no{color:var(--red)}.ri.no::before{content:'✗ ';font-weight:700}
+.ri.yes::before{content:'✓ ';color:var(--green);font-weight:700}
+.ri.warn::before{content:'! ';color:var(--amber);font-weight:700}
+
+/* ───── FINAL 3 VIEW ───── */
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fc{background:var(--bg2);border:1px solid var(--bdr-d);padding:20px;position:relative;overflow:hidden}
+.fc::before{content:attr(data-d);position:absolute;right:-4px;top:-10px;font-family:'Space Mono',monospace;font-size:80px;font-weight:700;color:rgba(232,160,32,0.04);line-height:1;pointer-events:none}
+.fc-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);margin-bottom:12px;letter-spacing:.1em}
+.fi2{font-size:11px;color:var(--text-d);line-height:1.7;padding:2px 0}
+.fi2::before{content:'— ';color:var(--text-d)}
+
+/* ───── FOOTER ───── */
+.ftr{margin-top:60px;padding-top:18px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.ftr-txt{font-size:9px;color:var(--text-d);letter-spacing:.08em}
+.cur{display:inline-block;width:7px;height:11px;background:var(--amber);animation:cblink 1s step-end infinite;margin-left:2px;vertical-align:middle}
+@keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ───── RESPONSIVE ───── */
+@media(max-width:700px){
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .db-grid,.lc-grid,.proj-picker,.rules-grid,.final-grid{grid-template-columns:1fr}
+  .db-sec{border-right:none;border-bottom:1px solid var(--bdr-d)}
+  .sched-row{flex-direction:column}
+  .sched-day{border-right:none;border-bottom:1px solid var(--bdr-d)}
+  .nav-btn{font-size:9px;padding:8px 10px;min-width:80px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ── HEADER ── -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="blink-badge"><div class="blink-dot"></div>OPERATION: INTERVIEW READY</div>
+    <div class="hdr-meta">PRASAD (MRKGP) / FRONTEND ENGINEER<br>STACK: REACT · NEXT.JS · TYPESCRIPT<br>STATUS: <span style="color:var(--amber)">EXECUTING</span></div>
+  </div>
+  <div class="hdr-title"><span class="acc">15-DAY</span> INTERVIEW<br>STRIKE PLAN</div>
+  <div class="hdr-sub">No tutorials. No passive reading. No waiting until ready.<br>Write code. Speak answers. Deep-dive your projects. Apply on Day 10.</div>
+  <div class="stats">
+    <div class="stat" data-lbl="Duration"><span class="stat-v">15</span><span class="stat-u">days</span></div>
+    <div class="stat" data-lbl="Daily Max"><span class="stat-v">5</span><span class="stat-u">hrs/day</span></div>
+    <div class="stat" data-lbl="Apply By"><span class="stat-v">D10</span></div>
+    <div class="stat" data-lbl="Focus Tracks"><span class="stat-v">5</span><span class="stat-u">tracks</span></div>
+    <div class="stat" data-lbl="Project Deep Dive"><span class="stat-v" style="font-size:13px;color:var(--cyan)">HIGH</span><span class="stat-u">priority</span></div>
+  </div>
+</div>
+
+<!-- ── PROGRESS ── -->
+<div class="prog-wrap">
+  <div class="prog-row"><span>Daily completion</span><span id="prog-pct">0 / 15 days started</span></div>
+  <div class="prog-bg"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+</div>
+
+<!-- ── NAV ── -->
+<div class="nav">
+  <button class="nav-btn active" onclick="sv('days',this)">▸ Daily Plan<span class="nb">15 days</span></button>
+  <button class="nav-btn" onclick="sv('project',this)">▸ Project Deep Dive<span class="nb">High Priority</span></button>
+  <button class="nav-btn" onclick="sv('rules',this)">▸ Rules & Traps<span class="nb">Read Once</span></button>
+  <button class="nav-btn" onclick="sv('final',this)">▸ Final 3 Days<span class="nb">Lock & Deploy</span></button>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW: DAILY PLAN
+══════════════════════════════════════ -->
+<div class="view active" id="view-days">
+  <div id="days-render"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW: PROJECT DEEP DIVE
+══════════════════════════════════════ -->
+<div class="view" id="view-project">
+
+  <div class="pdv-hero">
+    <div class="pdv-badge"><span>⬛</span> PROJECT DEEP DIVE — HIRING MANAGER ROUND</div>
+    <div class="pdv-title">Turn Your <span>Production Work</span><br>Into Interview Ammunition</div>
+    <div class="pdv-sub">
+      This is not storytelling practice. This is structured interrogation prep.<br>
+      You have real production experience. Most candidates don't. But experience only becomes an edge when you can articulate it under pressure — with specifics, tradeoffs, and metrics — for 20–30 minutes straight.
+    </div>
+  </div>
+
+  <!-- PROJECT PICKER -->
+  <div style="margin-bottom:20px">
+    <div class="sec-lbl" style="margin-bottom:10px;font-size:9px;letter-spacing:.18em;color:var(--cyan)">// STEP 1 — SELECT YOUR 2 PRIMARY PROJECTS</div>
+    <div class="proj-picker">
+      <div class="proj-card selected" data-code="PC" onclick="selectProj(this,'procoach')">
+        <div class="sel-dot"></div>
+        <div class="proj-card-lbl">Project Alpha</div>
+        <div class="proj-card-name">ProCoach</div>
+        <div class="proj-card-desc">Coaching marketplace · ~2,000 session enrollments/month · Payments (Razorpay) · RBAC · SaaS dashboard</div>
+      </div>
+      <div class="proj-card" data-code="KV" onclick="selectProj(this,'khetivalah')">
+        <div class="sel-dot"></div>
+        <div class="proj-card-lbl">Project Beta</div>
+        <div class="proj-card-name">KhetiValah</div>
+        <div class="proj-card-desc">Agri-services platform · Multi-role user system · Service marketplace · API-heavy · Real-world scale</div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text-d);border-left:2px solid var(--amber-d);padding-left:12px">
+      Prepare BOTH projects. Primary project (ProCoach) gets 70% of your prep time. Secondary (KhetiValah) gets 30%.<br>
+      Interviewers will ask you to switch. You need both ready.
+    </div>
+  </div>
+
+  <!-- 5 LAYERS -->
+  <div style="margin-bottom:8px">
+    <div class="sec-lbl" style="font-size:9px;letter-spacing:.18em;color:var(--cyan);margin-bottom:12px">// STEP 2 — MASTER ALL 5 LAYERS (EQUAL PRIORITY TO DSA)</div>
+  </div>
+
+  <!-- LAYER 1 -->
+  <div class="layer open" id="layer-1">
+    <div class="layer-hdr" onclick="toggleLayer('layer-1')">
+      <div class="layer-num">L1</div>
+      <div class="layer-info">
+        <div class="layer-title">Problem & Business Context</div>
+        <div class="layer-sub">What existed before you built this? Who needed it and why?</div>
+      </div>
+      <div class="layer-ico">▾</div>
+    </div>
+    <div class="layer-body">
+      <div class="layer-content">
+        <div class="lc-grid">
+          <div class="lc-block">
+            <div class="lc-lbl">Questions to answer cold</div>
+            <div class="lc-q">What specific problem did this product solve?</div>
+            <div class="lc-q">Who were the primary users? What were their pain points?</div>
+            <div class="lc-q">What was the state before this system existed?</div>
+            <div class="lc-q">What was the business model? How did your work enable revenue?</div>
+            <div class="lc-q">What constraints (time, team, budget) shaped your decisions?</div>
+          </div>
+          <div class="lc-block">
+            <div class="lc-lbl">ProCoach — Prep answers for</div>
+            <div class="lc-hint">Coaches had no centralized booking, payment, or session tracking</div>
+            <div class="lc-hint">Users: coaches (supply) + students (demand) + platform admin</div>
+            <div class="lc-hint">Before: WhatsApp-based booking, manual payment tracking</div>
+            <div class="lc-hint">Revenue: per-session commission + SaaS subscription fees</div>
+            <div class="lc-hint">Constraints: small team, fast MVP pressure, Indian payment rails</div>
+          </div>
+        </div>
+        <div class="sec-lbl" style="margin-bottom:6px">Your answer (write it, then speak it)</div>
+        <textarea class="answer-area" placeholder="Write your 2-minute answer for Layer 1 here. Include: problem, users, before-state, business model. Then speak it aloud 3 times."></textarea>
+        <div style="font-size:10px;color:var(--cyan);margin-top:6px;opacity:.7">Goal: Speak this layer in 2 minutes flat. No notes. Specific numbers preferred.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 2 -->
+  <div class="layer" id="layer-2">
+    <div class="layer-hdr" onclick="toggleLayer('layer-2')">
+      <div class="layer-num">L2</div>
+      <div class="layer-info">
+        <div class="layer-title">Architecture</div>
+        <div class="layer-sub">Frontend structure · Backend interaction · End-to-end data flow</div>
+      </div>
+      <div class="layer-ico">▾</div>
+    </div>
+    <div class="layer-body">
+      <div class="layer-content">
+        <div class="lc-grid">
+          <div class="lc-block">
+            <div class="lc-lbl">Frontend architecture questions</div>
+            <div class="lc-q">How was your component tree structured? (top-level layout → feature modules → atoms)</div>
+            <div class="lc-q">How did you manage state? (local / context / zustand / server state)</div>
+            <div class="lc-q">How was the API layer abstracted? (hooks, service layer, fetch wrapper)</div>
+            <div class="lc-q">How did auth flow through the frontend? (token storage, refresh, guards)</div>
+            <div class="lc-q">How did RBAC control what users could see and do?</div>
+          </div>
+          <div class="lc-block">
+            <div class="lc-lbl">Backend interaction questions</div>
+            <div class="lc-q">What REST endpoints did you build against or design?</div>
+            <div class="lc-q">How did you handle async workflows? (booking → payment → confirmation)</div>
+            <div class="lc-q">How did you handle API errors, loading states, and retries?</div>
+            <div class="lc-q">What was the data flow for a payment? (button click → webhook → UI update)</div>
+            <div class="lc-q">Where did race conditions appear and how did you prevent them?</div>
+          </div>
+        </div>
+        <div class="sec-lbl" style="margin-bottom:6px">Diagram your architecture (then describe it verbally)</div>
+        <textarea class="answer-area" style="min-height:100px" placeholder="Text-diagram your architecture here. Example: [Router] → [Layout] → [Dashboard Module] → [BookingCard] → useBooking() → api/bookings → [Server] → [DB]. Then speak the full data flow end-to-end."></textarea>
+        <div style="font-size:10px;color:var(--cyan);margin-top:6px;opacity:.7">Goal: Walk through architecture end-to-end in under 4 minutes. Interviewer should be able to draw it from your words.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 3 -->
+  <div class="layer" id="layer-3">
+    <div class="layer-hdr" onclick="toggleLayer('layer-3')">
+      <div class="layer-num">L3</div>
+      <div class="layer-info">
+        <div class="layer-title">Technical Decisions & Tradeoffs</div>
+        <div class="layer-sub">Why React / Next.js? Why these patterns? What did you reject?</div>
+      </div>
+      <div class="layer-ico">▾</div>
+    </div>
+    <div class="layer-body">
+      <div class="layer-content">
+        <div class="lc-grid">
+          <div class="lc-block">
+            <div class="lc-lbl">Decision questions</div>
+            <div class="lc-q">Why Next.js instead of plain React or another framework?</div>
+            <div class="lc-q">Why that specific rendering strategy (SSR/SSG/CSR) for each page type?</div>
+            <div class="lc-q">Why Razorpay over Stripe or others in your payment flow?</div>
+            <div class="lc-q">Why your chosen state management approach? What did you reject?</div>
+            <div class="lc-q">Why your form handling approach? (React Hook Form vs Formik vs custom)</div>
+          </div>
+          <div class="lc-block">
+            <div class="lc-lbl">Tradeoff questions (harder)</div>
+            <div class="lc-q">What would you have done differently with 3 more months?</div>
+            <div class="lc-q">Where did you over-engineer? Where did you under-engineer?</div>
+            <div class="lc-q">What did you choose for speed-to-ship that created technical debt?</div>
+            <div class="lc-q">If you rebuilt this today with full freedom, what changes?</div>
+            <div class="lc-q">What did you almost build but decide not to? Why?</div>
+          </div>
+        </div>
+        <div class="sec-lbl" style="margin-bottom:6px">Your decision log (write 3 key decisions + why)</div>
+        <textarea class="answer-area" style="min-height:110px" placeholder="Decision 1: [What] — [Why we chose it] — [What we rejected] — [Tradeoff accepted]&#10;Decision 2: ...&#10;Decision 3: ..."></textarea>
+        <div style="font-size:10px;color:var(--cyan);margin-top:6px;opacity:.7">Goal: Never say 'we just used X.' Always say 'we chose X because Y, and the tradeoff was Z.'</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 4 -->
+  <div class="layer" id="layer-4">
+    <div class="layer-hdr" onclick="toggleLayer('layer-4')">
+      <div class="layer-num">L4</div>
+      <div class="layer-info">
+        <div class="layer-title">Failures, Bugs & Production Incidents</div>
+        <div class="layer-sub">2 real incidents minimum · Root cause · Fix · Impact</div>
+      </div>
+      <div class="layer-ico">▾</div>
+    </div>
+    <div class="layer-body">
+      <div class="layer-content">
+        <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.18);padding:14px;margin-bottom:16px">
+          <div style="font-size:10px;color:var(--red);font-weight:600;margin-bottom:6px;letter-spacing:.1em">WHY THIS LAYER IS CRITICAL</div>
+          <div style="font-size:11px;color:var(--text-d);line-height:1.75">Interviewers at senior level specifically probe failures. A candidate who says "everything went smoothly" is immediately distrusted. Failures show depth of understanding, ownership, and growth. Prepare 2 real incidents with specific technical root causes.</div>
+        </div>
+        <div class="lc-grid">
+          <div class="lc-block">
+            <div class="lc-lbl">Incident structure (use this format)</div>
+            <div class="lc-hint">WHAT broke — describe the symptom in user terms</div>
+            <div class="lc-hint">WHEN — when was it discovered (prod vs testing)</div>
+            <div class="lc-hint">ROOT CAUSE — the exact technical reason (not "a bug")</div>
+            <div class="lc-hint">HOW you diagnosed it — tools, logs, reproduction steps</div>
+            <div class="lc-hint">FIX — what code/architecture changed</div>
+            <div class="lc-hint">IMPACT — users affected, downtime, revenue risk</div>
+            <div class="lc-hint">PREVENTION — what you added to prevent recurrence</div>
+          </div>
+          <div class="lc-block">
+            <div class="lc-lbl">Likely incidents in your work</div>
+            <div class="lc-hint">Razorpay webhook race condition (payment confirmed but UI stuck)</div>
+            <div class="lc-hint">RBAC edge case — user saw unauthorized data after role change</div>
+            <div class="lc-hint">useEffect fetching stale data on rapid filter changes</div>
+            <div class="lc-hint">SSR hydration mismatch causing layout flash</div>
+            <div class="lc-hint">Session expiry not handled — user lost form state mid-checkout</div>
+            <div class="lc-hint">Slow dashboard query — N+1 problem discovered in prod</div>
+          </div>
+        </div>
+        <div class="sec-lbl" style="margin-bottom:6px">Document your 2 incidents</div>
+        <textarea class="answer-area" style="min-height:130px" placeholder="INCIDENT 1:&#10;What: &#10;Root cause: &#10;Fix: &#10;Impact: &#10;&#10;INCIDENT 2:&#10;What: &#10;Root cause: &#10;Fix: &#10;Impact: "></textarea>
+        <div style="font-size:10px;color:var(--cyan);margin-top:6px;opacity:.7">Goal: Tell each incident story in 2 minutes. Technical depth + personal ownership. Never blame teammates.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 5 -->
+  <div class="layer" id="layer-5">
+    <div class="layer-hdr" onclick="toggleLayer('layer-5')">
+      <div class="layer-num">L5</div>
+      <div class="layer-info">
+        <div class="layer-title">Impact, Scale & What You'd Improve</div>
+        <div class="layer-sub">Metrics · 10x scale challenge · Redesign decisions</div>
+      </div>
+      <div class="layer-ico">▾</div>
+    </div>
+    <div class="layer-body">
+      <div class="layer-content">
+        <div class="lc-grid">
+          <div class="lc-block">
+            <div class="lc-lbl">Impact questions</div>
+            <div class="lc-q">What metrics changed because of your work?</div>
+            <div class="lc-q">How did your frontend work affect conversion or retention?</div>
+            <div class="lc-q">What was the volume? (sessions/month, transactions/day, users)</div>
+            <div class="lc-q">What performance improvements did you ship? (numbers only)</div>
+            <div class="lc-q">How did your RBAC or auth work affect security/trust?</div>
+          </div>
+          <div class="lc-block">
+            <div class="lc-lbl">Scale & improvement questions</div>
+            <div class="lc-q">If volume went 10x overnight, what breaks first?</div>
+            <div class="lc-q">What would you add to handle 10x? (caching, queues, CDN, virtualization)</div>
+            <div class="lc-q">What is the first thing you'd refactor if given 2 weeks?</div>
+            <div class="lc-q">What monitoring/observability is missing?</div>
+            <div class="lc-q">If you rebuilt this from scratch today, what architectural decision changes?</div>
+          </div>
+        </div>
+        <div class="sec-lbl" style="margin-bottom:6px">ProCoach metrics you should know cold</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
+          <div style="background:var(--bg3);border:1px solid var(--bdr-d);padding:12px;text-align:center">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--cyan)">~2,000</div>
+            <div style="font-size:9px;color:var(--text-d);letter-spacing:.1em;text-transform:uppercase;margin-top:2px">Sessions/month</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--bdr-d);padding:12px;text-align:center">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--cyan)">₹?</div>
+            <div style="font-size:9px;color:var(--text-d);letter-spacing:.1em;text-transform:uppercase;margin-top:2px">Transaction volume</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--bdr-d);padding:12px;text-align:center">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--cyan)">N roles</div>
+            <div style="font-size:9px;color:var(--text-d);letter-spacing:.1em;text-transform:uppercase;margin-top:2px">RBAC roles active</div>
+          </div>
+        </div>
+        <textarea class="answer-area" placeholder="Fill in your real numbers. Approximate if needed, but have something. 'I don't know the metrics' is a red flag in a hiring manager round."></textarea>
+        <div style="font-size:10px;color:var(--cyan);margin-top:6px;opacity:.7">Goal: Answer the 10x scale question with a specific bottleneck identified and a concrete mitigation plan.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCK QUESTIONS -->
+  <div style="background:var(--bg2);border:1px solid var(--bdr-d);margin-top:20px">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--bdr-d);display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="sec-lbl" style="margin-bottom:2px;color:var(--cyan)">// MOCK INTERVIEW QUESTIONS</div>
+        <div style="font-size:11px;color:var(--text-d)">Practice these daily from Day 3 onwards. Answer cold — no notes.</div>
+      </div>
+      <div style="font-size:9px;color:var(--text-d);border:1px solid var(--bdr-d);padding:3px 10px">HIRING MANAGER ROUND</div>
+    </div>
+    <ul class="mock-q-list">
+      <li class="mock-q"><span class="mock-q-icon">Q1</span><span>"Walk me through your most complex project end-to-end. Don't skip the technical parts."</span></li>
+      <li class="mock-q hard"><span class="mock-q-icon" style="background:var(--red)">Q2</span><span>"What was the biggest technical challenge you faced? Not a process challenge — a technical one."</span></li>
+      <li class="mock-q"><span class="mock-q-icon">Q3</span><span>"What would you redesign if you had complete freedom and no constraints?"</span></li>
+      <li class="mock-q hard"><span class="mock-q-icon" style="background:var(--red)">Q4</span><span>"How did your specific work — not the team's work — impact the business?"</span></li>
+      <li class="mock-q"><span class="mock-q-icon">Q5</span><span>"Explain your payment flow to me. What happens between the user clicking 'Pay' and seeing a confirmation?"</span></li>
+      <li class="mock-q hard"><span class="mock-q-icon" style="background:var(--red)">Q6</span><span>"Your dashboard is loading slowly. Walk me through how you'd diagnose and fix it."</span></li>
+      <li class="mock-q"><span class="mock-q-icon">Q7</span><span>"If this product needed to scale 10x, what breaks first on the frontend? What's your plan?"</span></li>
+      <li class="mock-q hard"><span class="mock-q-icon" style="background:var(--red)">Q8</span><span>"Tell me about a production bug you caused. What was the root cause?"</span></li>
+    </ul>
+  </div>
+
+  <!-- DAILY PRACTICE SCHEDULE -->
+  <div style="margin-top:20px">
+    <div class="sec-lbl" style="font-size:9px;letter-spacing:.18em;color:var(--cyan);margin-bottom:12px">// DAILY PRACTICE SCHEDULE — INTEGRATED INTO 15-DAY PLAN</div>
+    <div class="sched-row">
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 3</div>
+        <div class="sched-day-focus">Layer 1: Business context. Speak for 2 min.</div>
+        <div class="sched-day-time">20 min</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 4–5</div>
+        <div class="sched-day-focus">Layer 2: Architecture diagram + verbal walkthrough</div>
+        <div class="sched-day-time">25 min/day</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 6–7</div>
+        <div class="sched-day-focus">Layer 3: 3 key decisions with tradeoffs. Speak each.</div>
+        <div class="sched-day-time">20 min/day</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 8–9</div>
+        <div class="sched-day-focus">Layer 4: 2 incidents. Full RCA spoken cold.</div>
+        <div class="sched-day-time">25 min/day</div>
+      </div>
+    </div>
+    <div class="sched-row">
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 10</div>
+        <div class="sched-day-focus">Layer 5: Impact metrics + 10x scale answer locked</div>
+        <div class="sched-day-time">20 min</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 11–12</div>
+        <div class="sched-day-focus">Full project walkthrough: all 5 layers, timed 20 min</div>
+        <div class="sched-day-time">20 min/day</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 13</div>
+        <div class="sched-day-focus">Mock Q1–Q4 cold. Record. Listen back.</div>
+        <div class="sched-day-time">30 min</div>
+      </div>
+      <div class="sched-day">
+        <div class="sched-day-lbl">Day 14–15</div>
+        <div class="sched-day-focus">Full mock with all 8 questions. KhetiValah backup ready.</div>
+        <div class="sched-day-time">30 min/day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="outcome-box">
+    <div class="outcome-box-title">// OUTPUT EXPECTATION — BY DAY 10+</div>
+    <div class="outcome-item">Explain your primary project end-to-end for 20–30 minutes without notes</div>
+    <div class="outcome-item">Defend every technical decision with a specific reason and tradeoff accepted</div>
+    <div class="outcome-item">Answer follow-up questions on any layer without confusion or hedging</div>
+    <div class="outcome-item">Narrate 2 production failures with root cause and fix — confidently, not apologetically</div>
+    <div class="outcome-item">State impact metrics from memory (even if approximate — never "I don't know")</div>
+    <div class="outcome-item">Answer the 10x scale question with a specific bottleneck and a real mitigation plan</div>
+    <div class="outcome-item">Switch to KhetiValah on demand and give a 10-minute version of the same depth</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW: RULES & TRAPS
+══════════════════════════════════════ -->
+<div class="view" id="view-rules">
+  <div class="rules-grid">
+    <div class="rc">
+      <div class="rc-title">// what NOT to do</div>
+      <div class="ri no">Watch tutorials instead of writing code</div>
+      <div class="ri no">Re-read notes and call it preparation</div>
+      <div class="ri no">Wait until "ready" to apply (Day 10 is the rule)</div>
+      <div class="ri no">Study random DSA without a pattern framework</div>
+      <div class="ri no">Practice coding with autocomplete on</div>
+      <div class="ri no">Skip speaking practice any single day</div>
+      <div class="ri no">Study more than 5 hours in one day</div>
+      <div class="ri no">Memorize syntax without writing it out</div>
+      <div class="ri no">Learn new topics after Day 12</div>
+      <div class="ri no">Answer project questions without specific numbers</div>
+      <div class="ri no">Say "we built" — always say "I specifically built"</div>
+    </div>
+    <div class="rc">
+      <div class="rc-title">// non-negotiable rules</div>
+      <div class="ri yes">Write every code snippet by hand — plain editor, no hints</div>
+      <div class="ri yes">Speak your answer aloud every single day</div>
+      <div class="ri yes">Apply to 3 jobs/day starting Day 10</div>
+      <div class="ri yes">Complete the self-test before sleeping</div>
+      <div class="ri yes">Record your voice at least twice per week</div>
+      <div class="ri yes">If stuck 10+ min, write pseudocode first</div>
+      <div class="ri yes">Treat Day 10 as a hard, immovable deadline</div>
+      <div class="ri yes">Prepare project answers with specific metrics and tradeoffs</div>
+      <div class="ri yes">After mock: debrief failures in writing immediately</div>
+    </div>
+    <div class="rc">
+      <div class="rc-title">// common failure points</div>
+      <div class="ri warn">Day 1–3: Drills feel too basic → this is the point, push through</div>
+      <div class="ri warn">Day 4–6: DSA overwhelm → stick to 3 patterns only, nothing else</div>
+      <div class="ri warn">Day 6–7: Project answers are vague → add numbers and specifics</div>
+      <div class="ri warn">Day 7–8: Confidence dip after mock → normal, write down what failed</div>
+      <div class="ri warn">Day 9: Delaying applications → this starts Day 10, non-negotiable</div>
+      <div class="ri warn">Day 11+: Trying to learn new topics → stop immediately</div>
+      <div class="ri warn">Describing project as team work → always specify your contribution</div>
+      <div class="ri warn">Forgetting speaking practice when tired → 10 minutes is enough</div>
+    </div>
+    <div class="rc">
+      <div class="rc-title">// week-over-week progression</div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:10px;color:var(--text-b);font-weight:600;margin-bottom:4px">WEEK 1 — RECALL ENGINE</div>
+        <div class="ri">Rebuild syntax muscle memory. Start project layer documentation. You will feel slow — that is correct. Do not skip ahead.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--text-b);font-weight:600;margin-bottom:4px">WEEK 2 — INTERVIEW MODE</div>
+        <div class="ri">Simulate pressure. Apply live. Complete all 5 project layers. Speed and confidence emerge through repetition, not more studying.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW: FINAL 3 DAYS
+══════════════════════════════════════ -->
+<div class="view" id="view-final">
+  <div style="margin-bottom:20px;padding:16px;border-left:2px solid var(--amber);background:var(--amber-xs)">
+    <div style="font-size:10px;color:var(--amber);font-weight:600;margin-bottom:6px;letter-spacing:.1em">TRANSITION PROTOCOL — DAYS 13–15</div>
+    <div style="font-size:11px;color:var(--text-d);line-height:1.8">
+      These are not study days. They are deployment days. Zero new topics. Zero new patterns.<br>
+      Your job: simulate, lock project stories, and apply. You are already ready. Act like it.
+    </div>
+  </div>
+  <div class="final-grid">
+    <div class="fc" data-d="13">
+      <div class="fc-title">DAY 13 — LOCK</div>
+      <div class="fi2">Zero new topics. No exceptions whatsoever.</div>
+      <div class="fi2">Review your own handwritten notes from Days 1–12 only</div>
+      <div class="fi2">Do one full mock interview (45 min) — record it</div>
+      <div class="fi2">Finalize ProCoach all-5-layers story — speak it timed</div>
+      <div class="fi2">Finalize KhetiValah 10-minute version</div>
+      <div class="fi2">Confirm minimum 6 applications already submitted</div>
+      <div style="margin-top:12px;font-size:9px;color:var(--amber)">CHECK: ProCoach story under 25 min, no notes, cold start</div>
+    </div>
+    <div class="fc" data-d="14">
+      <div class="fc-title">DAY 14 — SIMULATE</div>
+      <div class="fi2">Treat today as a real interview day — full commitment</div>
+      <div class="fi2">9AM: Say TMAY 5 times, different pacing each time</div>
+      <div class="fi2">10AM: 45-min coding — 1 medium + 1 easy, timed, blank editor</div>
+      <div class="fi2">11AM: 30-min system design — design a Kanban board frontend</div>
+      <div class="fi2">2PM: Full hiring manager round simulation — all 8 mock questions</div>
+      <div class="fi2">Send 3 more applications — running total 12+ by end of day</div>
+      <div style="margin-top:12px;font-size:9px;color:var(--amber)">CHECK: Did you speak before writing any code?</div>
+    </div>
+    <div class="fc" data-d="15">
+      <div class="fc-title">DAY 15 — DEPLOY</div>
+      <div class="fi2">Apply to 5 companies — best targets, today, no more waiting</div>
+      <div class="fi2">Write post-interview ritual: 10-min debrief after every interview</div>
+      <div class="fi2">Write parking lot: 5 topics to improve after receiving an offer</div>
+      <div class="fi2">Set calendar: 3 problems/week + 1 mock/week to maintain readiness</div>
+      <div class="fi2">Record final TMAY — this is your improvement benchmark</div>
+      <div class="fi2">Record yourself answering Q1: "Walk me through your project"</div>
+      <div style="margin-top:12px;font-size:9px;color:var(--green)">You are interview-ready. Not perfect. Ready. Execute.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ftr">
+  <div class="ftr-txt">STRIKE PLAN v2.0 — 5-TRACK EDITION · JS / DSA / FRONTEND / PROJECT DEEP DIVE / COMMS<span class="cur"></span></div>
+  <div class="ftr-txt">TARGET: RAZORPAY · CHARGEBEE · KEKA HR · KHATABOOK · VYAPAR</div>
+</div>
+</div>
+
+<script>
+/* ── DATA ── */
+const DAYS = [
+  {
+    d:1,wk:'week1',
+    title:'Rebuild JavaScript muscle memory — from zero',
+    tags:['code'],
+    proj:'Start Layer 1 notes (business context) — 15 min',
+    obj:'Force your hands to write JS without assistance. Rebuild the reflex, not the knowledge. Autocomplete is banned.',
+    tasks:[
+      'Open plain text editor — disable all IntelliSense and Copilot',
+      'Write 10 array methods from scratch: map, filter, reduce, find, findIndex, some, every, flat, forEach, includes',
+      'Write 3 loop types for same problem: for, while, for...of',
+      'Write 5 object transforms: pick, omit, merge, deepClone, groupBy',
+      'PROJECT: Open Project Deep Dive tab — write Layer 1 business context for ProCoach (15 min)',
+      'Speaking: Say "Tell me about yourself" — 90 seconds, timed, record it'
+    ],
+    time:['JS array drills · 2.5h','Object transforms · 1h','Project Layer 1 · 15m','Speaking · 15m'],
+    out:'You can write array/object manipulation code without reference. Speed irrelevant today.',
+    st:['Write groupBy(users,"role") in under 5 min — blank editor','Implement flatMap without built-in','Describe ProCoach in 60 seconds — what problem does it solve?']
+  },
+  {
+    d:2,wk:'week1',
+    title:'Closures, async/await, promises — the 3 interview traps',
+    tags:['code'],
+    proj:'Layer 1 refinement — speak it aloud 3 times',
+    obj:'These 3 topics cause 80% of JS interview failures. Write them, do not read them.',
+    tasks:[
+      'Write 5 closure examples: counter, memoize, once, partial application, module pattern',
+      'Write fetchWithRetry(url, retries) with async/await from scratch',
+      'Simulate Promise.all, Promise.race, Promise.allSettled manually',
+      'Write debounce and throttle from scratch — no reference',
+      'PROJECT: Speak Layer 1 (ProCoach business context) 3 times aloud — refine each time',
+      'Speaking: "What is a closure?" — 60 seconds, no notes'
+    ],
+    time:['Closures · 1.5h','Async/promise drills · 1.5h','debounce+throttle · 45m','Project speaking · 20m','Speaking · 15m'],
+    out:'You can write and explain closures, async patterns, and debounce under interview pressure.',
+    st:['Write debounce without reference — timed 8 min','Explain Promise.allSettled vs all in 2 sentences','Speak ProCoach Layer 1 cold — 2 minutes, no notes']
+  },
+  {
+    d:3,wk:'week1',
+    title:'DSA Pattern 1 — Arrays & hashing + Project Layer 2 start',
+    tags:['dsa','code','proj'],
+    proj:'Layer 2: Architecture diagram — draw your component tree on paper',
+    obj:'Arrays + hashmaps cover 40% of interview DSA. Build pattern recognition. Start your project architecture diagram.',
+    tasks:[
+      'Solve: Two Sum — brute force first, then hashmap optimization',
+      'Solve: Group Anagrams — identify the hash key pattern',
+      'Solve: Top K Frequent Elements — frequency map + sort',
+      'Explain your approach aloud before writing each line',
+      'PROJECT: Draw ProCoach component tree on paper (Layout → Modules → Atoms). Write API layer flow.',
+      'Speaking: explain ProCoach architecture verbally for 3 min'
+    ],
+    time:['3 DSA problems · 2.5h','Verbal walkthroughs · 30m','Project Layer 2 diagram · 30m','Speaking · 30m'],
+    out:'You recognize hashmap patterns on sight. You can diagram your own project architecture.',
+    st:['Solve Two Sum in under 10 min — blank editor','Explain L2 architecture: what renders first when user lands on dashboard?','State the hashmap pattern in one sentence from memory']
+  },
+  {
+    d:4,wk:'week1',
+    title:'React internals + Project Layer 2 verbal walkthrough',
+    tags:['frontend','proj'],
+    proj:'Layer 2: Speak architecture end-to-end — data flow from click to server',
+    obj:'You use React daily but cannot explain it. Senior interviews will probe exactly this. Fix it today.',
+    tasks:[
+      'Write memo/useMemo/useCallback example showing the difference — from scratch',
+      'Diagram on paper: every trigger for a React re-render',
+      'Write useEffect with race condition, then fix with cleanup',
+      'Write 3 custom hooks: useDebounce, usePrevious, useLocalStorage',
+      'PROJECT: Speak ProCoach architecture end-to-end — from user login to payment confirmation. Timed 5 min.',
+      'Speaking: "How does React reconciliation work?" — 2 min, no notes'
+    ],
+    time:['Hooks drills · 2h','Custom hooks · 1h','Project speaking · 25m','Speaking · 30m'],
+    out:'You can explain React re-renders, hooks, and your own project architecture without reference.',
+    st:['When does useCallback actually help? Concrete example.','Write useDebounce in 10 min — timed','Explain the data flow for a booking in ProCoach — from button click to DB']
+  },
+  {
+    d:5,wk:'week1',
+    title:'DSA Pattern 2 — Sliding window + Project Layer 3 decisions',
+    tags:['dsa','proj'],
+    proj:'Layer 3: Write 3 key technical decisions with tradeoffs',
+    obj:'Sliding window is the 2nd most common frontend DSA pattern. Also: lock your technical decision rationale for your project.',
+    tasks:[
+      'Solve: Longest Substring Without Repeating Characters',
+      'Solve: Maximum Sum Subarray of size K',
+      'Solve: Valid Palindrome (two pointers)',
+      'Write the sliding window template from memory after solving',
+      'PROJECT: Write 3 ProCoach decisions — why Next.js, why Razorpay, why your state approach. Each: why chosen + what rejected + tradeoff.',
+      'Speaking: "Why did you choose Next.js for ProCoach?" — 90 sec with real reasons'
+    ],
+    time:['3 DSA problems · 2h','Pattern notes · 30m','Project Layer 3 · 30m','Speaking · 30m'],
+    out:'You own the sliding window template. You can defend 3 project decisions without hedging.',
+    st:['Write sliding window template from memory — no reference','What did you reject when choosing your state management? Why?','Solve Longest Substring — timed 12 min']
+  },
+  {
+    d:6,wk:'week1',
+    title:'Next.js depth — SSR/SSG/ISR tradeoffs + Project Layer 3 verbal',
+    tags:['frontend','proj'],
+    proj:'Layer 3: Speak all 3 decisions cold — different tradeoffs each',
+    obj:'You ship Next.js but cannot articulate tradeoffs. Interviewers will probe this. Use your own projects as evidence.',
+    tasks:[
+      'Write tradeoffs matrix: SSR vs CSR vs SSG vs ISR (paper or plain text)',
+      'Map each rendering strategy to a real ProCoach or KhetiValah page',
+      'Write App Router vs Pages Router differences — concrete examples',
+      'Write a server component + Suspense streaming data fetch',
+      'PROJECT: Speak Layer 3 cold — "Tell me about 3 key technical decisions you made in ProCoach." Timed 5 min.',
+      'Speaking: "Why SSR for your dashboard? What would break with SSG?" — 90 sec'
+    ],
+    time:['Tradeoffs matrix · 1h','Next.js code examples · 1.5h','Project Layer 3 speaking · 25m','Speaking · 45m'],
+    out:'You can answer any Next.js architecture question using concrete production examples. Layer 3 locked.',
+    st:['When does SSG break? What do you use instead?','Explain ISR in one sentence without "regenerate"','What rendering strategy did KhetiValah use and why?']
+  },
+  {
+    d:7,wk:'week1',
+    title:'First mock interview — cold simulation + Project Layer 4 start',
+    tags:['comms','code','proj'],
+    proj:'Layer 4: Write your first production incident — full RCA format',
+    obj:'You need failure data, not more studying. Do a real mock now. It will feel bad. That is the entire point.',
+    tasks:[
+      'Set 45-min timer. Treat as real. No pausing.',
+      'Round 1 (15 min): HR questions aloud — record — TMAY, strengths, why leaving',
+      'Round 2 (20 min): One medium LeetCode — blank editor, timer running',
+      'Round 3 (10 min): Walk interviewer through ProCoach system design',
+      'Post-mock: write exactly 3 things you failed at — these are Week 2 targets',
+      'PROJECT: Document Incident #1 — WHAT / ROOT CAUSE / FIX / IMPACT. Write it in Layer 4.',
+      'Do NOT review solutions for 2 hours after mock'
+    ],
+    time:['Mock interview · 45m','Debrief + failure analysis · 45m','Project Layer 4 · 30m','Gap review · 1h'],
+    out:'A written list of 3 failures. Incident #1 documented. Week 2 built around fixing gaps.',
+    st:['State your 3 failure points without notes','Did you talk through your approach before coding?','Speak Incident #1 — 2 min, cold, full RCA']
+  },
+  {
+    d:8,wk:'week2',
+    title:'Fix mock failures — targeted drilling + Project Layer 4 complete',
+    tags:['code','comms','proj'],
+    proj:'Layer 4: Document Incident #2. Speak both incidents cold — no notes.',
+    obj:'100% of today on your Day 7 gaps. Also complete Layer 4 with 2 full incidents.',
+    tasks:[
+      'Drill failure area #1 — 90 min focused practice, blank editor',
+      'Drill failure area #2 — 60 min',
+      'PROJECT: Write and speak Incident #2 in Layer 4. Speak both incidents back to back — timed 4 min total.',
+      'Redo weakest HR questions — record again, compare to Day 7',
+      'Write and memorize TMAY script (90 sec) — lock it today',
+      'Drill failure area #3 — 45 min'
+    ],
+    time:['Targeted drills · 3h','Project Layer 4 · 30m','TMAY script · 30m'],
+    out:'3 Day 7 failures now fixed. Layer 4 complete. TMAY locked.',
+    st:['Say TMAY — under 90 sec, no notes. Ends with "why this company"?','Speak both incidents cold — 4 min total, no notes','Rate gaps from Day 7: 1–10. Must be 6+ to proceed.']
+  },
+  {
+    d:9,wk:'week2',
+    title:'Frontend system design — dashboard, payments, RBAC + Layer 5',
+    tags:['frontend','proj'],
+    proj:'Layer 5: Metrics locked + 10x scale answer prepared',
+    obj:'System design separates senior engineers. Your production experience is the edge. Layer 5 gets locked today.',
+    tasks:[
+      'Design Razorpay/Stripe payment flow — draw it, speak it aloud defending each decision',
+      'Design RBAC system: roles, guards, conditional rendering, mid-session role changes',
+      'Design real-time dashboard: pagination, filters, API race condition handling',
+      'PROJECT: Complete Layer 5 — write your actual metrics (or best estimates). Write the 10x bottleneck answer. Speak it — timed 3 min.',
+      'Speaking: "How did your work in ProCoach impact the business?" — 2 min, specific numbers only'
+    ],
+    time:['Payment flow design · 1.5h','RBAC design · 1h','Dashboard design · 45m','Project Layer 5 · 30m','Speaking · 30m'],
+    out:'3 system design answers ready. All 5 project layers complete for ProCoach.',
+    st:['How do you handle user losing role mid-session in RBAC?','State your ProCoach impact metric — one number, from memory','Answer the 10x scale question — what breaks first?']
+  },
+  {
+    d:10,wk:'week2',
+    title:'START APPLYING — non-negotiable + First full project run-through',
+    tags:['apply','dsa','proj'],
+    proj:'Full ProCoach run-through: all 5 layers, timed 20 min, cold',
+    obj:'You are not ready. You never will feel ready. Apply anyway. 3 applications today. This is the rule.',
+    tasks:[
+      'DSA: Solve LRU Cache — Map + doubly linked list, from scratch',
+      'Apply to 3 Tier 1 companies (Razorpay, Chargebee, Keka, or equivalent)',
+      'Customize resume headline and summary for each application',
+      'PROJECT: Do a full cold run-through of ProCoach — all 5 layers, timed 20 min, no notes. Record it.',
+      'Set up application tracker: company / role / date / status / follow-up',
+      'Speaking: "Why do you want to leave your current role?" — 60 sec, honest and forward-looking'
+    ],
+    time:['LRU Cache · 2h','3 applications · 1.5h','Full project run-through · 25m','Speaking · 30m'],
+    out:'3 applications submitted. LRU Cache solved. Full project walkthrough done and recorded.',
+    st:['LRU Cache from scratch — timed 25 min, no hints','Speak entire ProCoach project — did you go 20+ min without stalling?','Are the 3 applications actually submitted? Confirm.']
+  },
+  {
+    d:11,wk:'week2',
+    title:'Performance optimization + Project mock questions 1–4',
+    tags:['frontend','proj'],
+    proj:'Mock Q1–Q4: answer cold, record, review. Fix weak answers.',
+    obj:'Performance is the senior engineer filter. Your answers must be production-tested. Also: drill project mock questions.',
+    tasks:[
+      'Write examples of code splitting, lazy loading, tree shaking — real working code',
+      'Write virtualized list component from scratch (no library)',
+      'Write React.memo example where it hurts performance — explain why',
+      'Write image optimization strategy for dashboard with 50+ charts',
+      'PROJECT: Answer mock Q1–Q4 cold, recorded. Listen back. Write what was weak.',
+      'Apply to 3 more companies today',
+      'Speaking: "How have you optimized performance in production?" — 2 min, specific numbers'
+    ],
+    time:['Code splitting + lazy · 1h','Virtual list · 1.5h','Project mock Qs · 30m','Applications · 30m','Speaking · 30m'],
+    out:'Performance answers with real production examples. Mock Q1–Q4 debriefed.',
+    st:['Lighthouse tradeoff when React.lazy() is on every route?','Write simplest virtualized list — timed 15 min','Answer Q2 cold: "What was the biggest technical challenge?"']
+  },
+  {
+    d:12,wk:'week2',
+    title:'DSA Pattern 3 — Recursion + Project mock questions 5–8',
+    tags:['dsa','proj'],
+    proj:'Mock Q5–Q8: answer cold, record, compare to Day 11.',
+    obj:'Recursion is the panic trigger. Drill until the template is automatic. Complete all 8 mock project questions.',
+    tasks:[
+      'Solve: Flatten nested array recursively — 3 different implementations',
+      'Solve: Binary tree BFS and DFS — both from scratch',
+      'Solve: Fibonacci — recursive, memoized, iterative (all 3, explain tradeoffs)',
+      'Write recursion template from memory: base case → state change → recursive call → return',
+      'PROJECT: Answer mock Q5–Q8 cold, recorded. Also do a 10-min KhetiValah walkthrough.',
+      'Apply to 3 more companies — running total should be 9+ by end of today'
+    ],
+    time:['Recursion drills · 2h','Tree problems · 1.5h','Project mock Qs · 30m','Applications · 30m'],
+    out:'Recursion template automatic. All 8 project mock questions attempted. KhetiValah backup ready.',
+    st:['Flatten [[1,[2,3]],[4,[5,[6]]]] recursively — timed 5 min','Answer Q8 cold: "Tell me about a production bug you caused"','10-min KhetiValah walkthrough — no notes']
+  },
+  {
+    d:13,wk:'final',
+    title:'LOCK — no new topics. Consolidation and full mock simulation.',
+    tags:['comms','proj'],
+    proj:'Full ProCoach + partial KhetiValah — speak both projects, back to back.',
+    obj:'Learning anything new today is self-sabotage. Review. Lock. Simulate. Your project stories become weapons here.',
+    tasks:[
+      'Review your handwritten notes from Days 1–12 only — no new sources',
+      'Do one full 45-min mock: HR (15m) + coding (20m) + system design (10m) — record it',
+      'PROJECT: Full ProCoach run (20 min) then KhetiValah backup (10 min) — back to back, no notes. Record.',
+      'Watch mock recording: did you think aloud? Pause constructively or freeze?',
+      'Confirm at least 6 applications submitted. If not, send them first.'
+    ],
+    time:['Notes review · 1h','Full mock · 45m','Project double run · 35m','Debrief · 30m'],
+    out:'Two locked project stories. One recorded mock. Applications pipeline active.',
+    st:['ProCoach story — STAR format, under 25 min, cold start, no notes','State your 3 strongest interview answers right now','Speak Incident #1 cold — did you stumble on root cause?']
+  },
+  {
+    d:14,wk:'final',
+    title:'SIMULATE — full interview day, all 4 tracks active',
+    tags:['comms','code','proj'],
+    proj:'Full hiring manager simulation: all 8 mock questions back to back — 30 min.',
+    obj:'Treat today as a real interview. No partial effort. This is your final rehearsal.',
+    tasks:[
+      '9AM: Say TMAY 5 times with different pacing — record the best one',
+      '10AM: 45-min timed coding — 1 medium + 1 easy, blank editor, no hints',
+      '11AM: 30-min system design — Kanban board frontend from scratch',
+      '2PM: PROJECT — Full hiring manager simulation: all 8 mock questions back to back (30 min, recorded)',
+      '4PM: Send 3 more applications — running total 12+ by end of today',
+      'Evening: write what went well and what needs final adjustment'
+    ],
+    time:['Morning simulation · 2.5h','HM mock simulation · 30m','Applications · 1h','Debrief · 30m'],
+    out:'Full simulated interview day complete. All 4 tracks exercised. Nerves are normal.',
+    st:['Did you speak your approach before coding? Non-negotiable habit.','Did you finish medium problem in under 20 min?','HM mock: were you specific or vague on your impact metrics?']
+  },
+  {
+    d:15,wk:'final',
+    title:'DEPLOY — you are interview-ready. This is the starting line.',
+    tags:['apply','comms','proj'],
+    proj:'Record final "Walk me through ProCoach" — this is your benchmark.',
+    obj:'This is not a finish line. This is a launch. Apply to 5 companies. Record your project benchmark. Go.',
+    tasks:[
+      'Apply to 5 companies — best targets, today, no more waiting',
+      'Write post-interview ritual: what you do in 10 min after every interview ends',
+      'Write parking lot: 5 topics to improve after receiving an offer',
+      'Set recurring calendar blocks: 3 DSA problems/week + 1 mock/week',
+      'PROJECT: Record final "Walk me through ProCoach from scratch" — compare to Day 10 recording',
+      'Send LinkedIn connection requests to 3 people at target companies',
+      'Say aloud: "I am interview-ready. My preparation continues as I interview."'
+    ],
+    time:['5 applications · 1.5h','Setup + ritual · 45m','Project benchmark recording · 25m','Speaking · 20m'],
+    out:'5 applications submitted. Maintenance system active. You are in the pipeline.',
+    st:['5 applications actually submitted — not queued, submitted','Calendar block set for next week?','Compare Day 15 recording to Day 10 — what improved?']
+  }
+];
+
+const WK_LABELS = {
+  week1:{ lbl:'WEEK 01', desc:'Recall Engine — rebuild from zero' },
+  week2:{ lbl:'WEEK 02', desc:'Interview Mode — simulate and apply' },
+  final:{ lbl:'FINAL 03', desc:'Transition — lock, simulate, deploy' }
+};
+
+const TAG_MAP = { code:'JS/Code', dsa:'DSA', frontend:'Frontend', comms:'Comms', apply:'APPLY NOW', proj:'Project' };
+
+function renderDays(){
+  const c = document.getElementById('days-render');
+  let lastWk = null;
+
+  DAYS.forEach((d,i)=>{
+    if(d.wk !== lastWk){
+      const w = WK_LABELS[d.wk];
+      c.innerHTML += `<div class="wk-div">
+        <div class="wk-line"></div>
+        <div class="wk-lbl">${w.lbl}</div>
+        <div class="wk-desc">${w.desc}</div>
+        <div class="wk-line"></div>
+      </div>`;
+      lastWk = d.wk;
+    }
+
+    const tagsH = d.tags.map(t=>`<span class="tag t-${t}">${TAG_MAP[t]}</span>`).join('');
+    const tasksH = d.tasks.map((t,ti)=>`
+      <li id="t${d.d}-${ti}">
+        <div class="chk-box" onclick="chk(${d.d},${ti})"></div>
+        <span class="chk-txt">${t}</span>
+      </li>`).join('');
+    const timeH = d.time.map(t=>`<span class="chip">${t}</span>`).join('');
+    const stH = d.st.map(q=>`<li>${q}</li>`).join('');
+    const delay = (i%8)*35;
+
+    c.innerHTML += `
+    <div class="dc" id="card${d.d}" style="animation-delay:${delay}ms">
+      <div class="dc-hdr" onclick="toggleDc(${d.d})">
+        <div class="dc-num">
+          <span class="dc-num-lbl">Day</span>
+          <span class="dc-num-val">${String(d.d).padStart(2,'0')}</span>
+        </div>
+        <div class="dc-main">
+          <div class="dc-title-wrap">
+            <div class="tags">${tagsH}</div>
+            <div class="dc-title">${d.title}</div>
+            ${d.proj ? `<div class="proj-note">⬛ Project: ${d.proj}</div>` : ''}
+          </div>
+          <div class="exp-ico">▾</div>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div class="db-obj">
+          <div class="sec-lbl">// objective</div>
+          <div class="obj-txt">${d.obj}</div>
+        </div>
+        <div class="db-grid">
+          <div class="db-sec">
+            <div class="sec-lbl">// task list</div>
+            <ul class="chk-list">${tasksH}</ul>
+          </div>
+          <div class="db-sec">
+            <div style="margin-bottom:14px">
+              <div class="sec-lbl">// time breakdown</div>
+              <div class="chips">${timeH}</div>
+            </div>
+            <div>
+              <div class="sec-lbl">// output by end of day</div>
+              <div class="out-box">${d.out}</div>
+            </div>
+          </div>
+        </div>
+        <div class="db-sec full" style="background:rgba(0,0,0,0.2)">
+          <div class="sec-lbl">// self-test before sleep</div>
+          <ul class="st-list">${stH}</ul>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+/* ── INTERACTIONS ── */
+const ckState = {};
+
+function chk(day, idx){
+  const k = `${day}-${idx}`;
+  const li = document.getElementById(`t${day}-${idx}`);
+  const box = li.querySelector('.chk-box');
+  ckState[k] = !ckState[k];
+  box.classList.toggle('on', ckState[k]);
+  li.classList.toggle('done', ckState[k]);
+  updateProg();
+}
+
+function updateProg(){
+  const daysStarted = new Set(
+    Object.keys(ckState).filter(k=>ckState[k]).map(k=>k.split('-')[0])
+  ).size;
+  document.getElementById('prog-pct').textContent = `${daysStarted} / 15 days started`;
+  document.getElementById('prog-fill').style.width = `${(daysStarted/15)*100}%`;
+}
+
+function toggleDc(d){
+  document.getElementById(`card${d}`).classList.toggle('open');
+}
+
+function sv(view, btn){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(`view-${view}`).classList.add('active');
+}
+
+function toggleLayer(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function selectProj(el){
+  document.querySelectorAll('.proj-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+renderDays();
+</script>
+</body>
+</html>
